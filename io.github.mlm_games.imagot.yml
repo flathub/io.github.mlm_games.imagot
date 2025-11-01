@@ -17,8 +17,8 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/mlm-games/imagot/releases/download/0.2.16/web.zip
-        sha256: 6255f56af9ef537a39ddd89b677b296e1e2d9577a88159b82cb5b1f6728f289c
+        url: https://github.com/mlm-games/imagot/releases/download/0.2.17/web.zip
+        sha256: 00fa0eed4bdddaea494b4d566204e28dc3dea1a88d0fd37ecd52e95a6fcf1143
         dest: web
         x-checker-data:
           type: json
@@ -32,8 +32,8 @@ modules:
 
       - type: git
         url: https://github.com/mlm-games/imagot.git
-        tag: 0.2.16
-        commit: 91e540f7559e95e3ed0f3a37f7e579be4cbdd271
+        tag: 0.2.17
+        commit: 9bbb7968fa18191ba35661f58cd57294b79f55ce
         x-checker-data:
           type: git
           tag-pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
