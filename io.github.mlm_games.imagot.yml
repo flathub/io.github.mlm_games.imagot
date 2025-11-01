@@ -2,9 +2,9 @@ app-id: io.github.mlm_games.imagot
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 base: org.godotengine.godot.BaseApp
-base-version: '4.5'
+base-version: '4.5.1'
 sdk: org.freedesktop.Sdk
-command: godot-runner
+command: imagot
 finish-args:
   - --share=ipc
   - --socket=wayland
@@ -16,28 +16,32 @@ modules:
   - name: Imagot
     buildsystem: simple
     sources:
-      - type: file
-        url: https://github.com/mlm-games/imagot/releases/download/0.2.11/index.pck
-        sha256: 0150970b709250dfa12f98f8b800e85d8a4ee255423d5a39831d12882b2a1901
-        dest-filename: godot-runner.pck
+      - type: archive
+        url: https://github.com/mlm-games/imagot/releases/download/0.2.15/web.zip
+        sha256: 624a63d42d22f4b38408f035aa322b0d650338e5fa2eff522450146bac80ec43
+        dest: web
         x-checker-data:
           type: json
           url: https://api.github.com/repos/mlm-games/imagot/releases/latest
           is-main-source: true
           version-query: .tag_name
           url-query: |
-            .assets[] | select(.name | endswith("index.pck")) | .browser_download_url
+            .assets[]
+            | select(.name | endswith("web.zip"))
+            | .browser_download_url
 
       - type: git
         url: https://github.com/mlm-games/imagot.git
-        tag: 0.2.11
-        commit: 2f1a41d624e83c535626c287d2e2e44566745ac5
+        tag: 0.2.15
+        commit: 683880f899e6e299a8d3d1abdab160b3a6f94b93
         x-checker-data:
           type: git
           tag-pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
 
     build-commands:
-      - install -Dm644 godot-runner.pck ${FLATPAK_DEST}/bin/godot-runner.pck
+      - install -Dm644 web/index.pck ${FLATPAK_DEST}/bin/imagot.pck
+
+      - ln -s godot-runner ${FLATPAK_DEST}/bin/imagot
 
       - install -Dm644 icon.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -Dm644 flathub/${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
